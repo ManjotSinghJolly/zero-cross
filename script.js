@@ -27,7 +27,38 @@ const Gameboard = (function () {
   };
 })();
 
+//Factory function to make the player objects
+const createPlayer = function (name, marker) {
+  return {
+    name,
+    marker,
+  };
+};
+
+//Game controller IIFE
+const Game = (function () {
+  let players = [];
+  let currentPlayerIndex;
+  let gameOver;
+
+  const start = function () {
+    players = [
+      createPlayer(
+        document.getElementById("player1".value, "X"),
+        createPlayer(document.getElementById("player2".value, "O"))
+      ),
+    ];
+
+    currentPlayerIndex = 0;
+    gameOver = false;
+    Gameboard.render();
+  };
+  return {
+    start,
+  };
+})();
+
 const startButton = document.getElementById("start-game");
 startButton.addEventListener("click", function () {
-  Gameboard.render();
+  Game.start();
 });
