@@ -15,7 +15,7 @@ const Gameboard = (function () {
         const cell = document.createElement("div");
         cell.setAttribute("row-number", rowNumber);
         cell.setAttribute("col-number", colNumber);
-        cell.classList.add("cell");
+        cell.classList.add("cell", "circle");
         gridContainer.appendChild(cell);
       }
     }

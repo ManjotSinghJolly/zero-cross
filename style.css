@@ -1,3 +1,14 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+:root {
+  --cell-size: 100px;
+  --mark-size: calc(var(--cell-size) * 0.7);
+}
+
 h1 {
   color: hotpink;
 }
@@ -15,6 +26,9 @@ h1 {
   border: 1px solid black;
   box-sizing: border-box;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cell:first-child,
@@ -35,4 +49,43 @@ h1 {
 .cell:nth-child(7),
 .cell:nth-child(8) {
   border-bottom: none;
+}
+
+/* Making the X marker */
+.cell.x::before,
+.cell.x:after {
+  content: "";
+  width: calc(var(--mark-size) * 0.15);
+  height: var(--mark-size);
+  background-color: black;
+}
+
+.cell.x::before {
+  transform: rotate(45deg);
+  position: absolute;
+}
+
+.cell.x::after {
+  transform: rotate(-45deg);
+}
+
+/* Making the O marker */
+.cell.circle::before,
+.cell.circle::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.cell.circle::before {
+  width: var(--mark-size);
+  height: var(--mark-size);
+
+  background-color: black;
+}
+
+.cell.circle::after {
+  width: calc(var(--mark-size) * 0.7);
+  height: calc(var(--mark-size) * 0.7);
+  background-color: white;
 }
