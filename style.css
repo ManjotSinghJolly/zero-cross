@@ -134,4 +134,41 @@ footer {
 
 svg {
   vertical-align: middle;
+  transition: transform 0.3s ease-in-out;
+  /* animation: none; */
+
+  /* animation-play-state: paused; */
 }
+
+svg:hover {
+  transform: rotate(360deg) scale(1.2);
+}
+
+/* svg:hover {
+  animation-name: rotate;
+  animation-duration: 1s;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+svg:not(:hover) {
+  animation-name: none;
+} */
