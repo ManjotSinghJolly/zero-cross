@@ -8,7 +8,6 @@ againstPlayer.addEventListener("click", function () {
 });
 
 //Gameboard IIFE
-
 const Gameboard = (function () {
   let gameboard = [
     ["", "", "hello YOU"],
