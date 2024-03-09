@@ -9,15 +9,27 @@
   --mark-size: calc(var(--cell-size) * 0.7);
 }
 
+/* body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} */
 h1 {
+  margin-top: 20px;
   color: hotpink;
+  text-align: center;
 }
 
-#grid-container {
+.grid-container {
   display: flex;
   flex-wrap: wrap;
   width: 300px;
   height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .cell {
@@ -88,4 +100,23 @@ h1 {
   width: calc(var(--mark-size) * 0.7);
   height: calc(var(--mark-size) * 0.7);
   background-color: white;
+}
+
+#controls,
+#restart-game {
+  display: none;
+}
+
+#mode-choice {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#controls {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
