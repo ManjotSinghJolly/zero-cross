@@ -1,3 +1,4 @@
+// To select between different game modes and change displays
 const modeChoice = document.getElementById("mode-choice");
 const againstPlayer = document.getElementById("against-player");
 const controlSection = document.getElementById("controls");
@@ -10,7 +11,7 @@ againstPlayer.addEventListener("click", function () {
 //Gameboard IIFE
 const Gameboard = (function () {
   let gameboard = [
-    ["", "", "hello YOU"],
+    ["", "", ""],
     ["", "", ""],
     ["", "", ""],
   ];
@@ -19,15 +20,33 @@ const Gameboard = (function () {
     const body = document.body;
     const gridContainer = document.createElement("div");
     gridContainer.classList.add("grid-container");
+    let cellRowNumber;
+    let cellColNumber;
 
     // const gridContainer = document.getElementById("grid-container");
 
     for (let rowNumber = 0; rowNumber <= 2; rowNumber++) {
       for (let colNumber = 0; colNumber <= 2; colNumber++) {
         const cell = document.createElement("div");
-        cell.setAttribute("row-number", rowNumber);
-        cell.setAttribute("col-number", colNumber);
-        cell.classList.add("cell", "circle");
+        cellRowNumber = rowNumber;
+        cellColNumber = colNumber;
+        cell.addEventListener(
+          "click",
+          function () {
+            cellRowNumber = cell.getAttribute("data-row");
+            cellColNumber = cell.getAttribute("data-column");
+            // Check for turn
+            // Add marker to array
+            // Add class to visual cell
+            //check for winners
+            // Game.addToArray(Gameboard.gameboard, cellRowNumber, cellColNumber);
+            Game.addToArray(cellRowNumber, cellColNumber);
+          },
+          { once: true }
+        );
+        cell.setAttribute("data-row", rowNumber);
+        cell.setAttribute("data-column", colNumber);
+        cell.classList.add("cell");
         gridContainer.appendChild(cell);
       }
     }
@@ -35,6 +54,7 @@ const Gameboard = (function () {
   };
 
   return {
+    gameboard,
     render,
   };
 })();
@@ -66,8 +86,15 @@ const Game = (function () {
     gameOver = false;
     Gameboard.render();
   };
+
+  const addToArray = function (firstIndex, secondIndex) {
+    Gameboard.gameboard[firstIndex][secondIndex] = "Hello YOU";
+    console.log(Gameboard.gameboard);
+  };
+
   return {
     start,
+    addToArray,
   };
 })();
 
