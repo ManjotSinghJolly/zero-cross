@@ -31,6 +31,9 @@ const Gameboard = (function () {
         const cell = document.createElement("div");
         cellRowNumber = rowNumber;
         cellColNumber = colNumber;
+        cell.addEventListener("onmouseup", function () {
+          cell.style.backgroundColor = "greenyellow";
+        });
         cell.addEventListener(
           "click",
           function () {
@@ -72,22 +75,24 @@ const createPlayer = function (name, marker) {
 
 //Game controller IIFE
 const Game = (function () {
-  let players = [];
-  let currentPlayerIndex;
-  let gameOver;
-
   const start = function () {
+    const turnIndicator = document.getElementById("turn-indicator");
+    let playerX;
+    let playerO;
     controlSection.style.display = "none";
-    players = [
-      createPlayer(
-        document.getElementById("player1".value, "X"),
-        createPlayer(document.getElementById("player2".value, "O"))
-      ),
-    ];
+    const playerXname = document.getElementById("player1").value;
+    const playerOname = document.getElementById("player2").value;
 
-    currentPlayerIndex = 0;
-    gameOver = false;
+    playerX = createPlayer(playerXname, "X");
+    playerO = createPlayer(playerOname, "O");
+
     Gameboard.render();
+
+    const playerXSpace = document.getElementById("x-name");
+    const playerOSpace = document.getElementById("o-name");
+    playerXSpace.innerHTML = playerXname;
+    playerOSpace.innerHTML = playerOname;
+    turnIndicator.style.visibility = "visible";
   };
 
   // Function to add markers to the backend array

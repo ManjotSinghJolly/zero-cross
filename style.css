@@ -143,3 +143,61 @@ svg {
 svg:hover {
   transform: rotate(360deg) scale(1.2);
 }
+
+button {
+  cursor: pointer;
+}
+
+/* Turn indicator divs */
+
+#turn-indicator {
+  border: 3px solid red;
+  display: flex;
+  gap: 100px;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+}
+
+#x-section {
+  border: 3px solid blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+#o-section {
+  border: 3px solid blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.first-bar {
+  position: absolute;
+  width: 6px;
+  height: 35px;
+  transform: rotate(45deg);
+  background-color: black;
+}
+
+.second-bar {
+  width: 6px;
+  height: 35px;
+  transform: rotate(-45deg);
+  background-color: black;
+}
+
+.circle-outline {
+  position: relative;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: white;
+  border: 6px solid black;
+}
