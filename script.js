@@ -42,6 +42,7 @@ const Gameboard = (function () {
             //check for winners
             // Game.addToArray(Gameboard.gameboard, cellRowNumber, cellColNumber);
             Game.addToArray(turn, cellRowNumber, cellColNumber);
+            Game.addVisualMarker(turn, cell);
             turn++;
           },
           { once: true }
@@ -89,6 +90,7 @@ const Game = (function () {
     Gameboard.render();
   };
 
+  // Function to add markers to the backend array
   const addToArray = function (turn, firstIndex, secondIndex) {
     if (turn % 2 !== 0) {
       Gameboard.gameboard[firstIndex][secondIndex] = "X";
@@ -99,9 +101,19 @@ const Game = (function () {
     }
   };
 
+  // Function to add marker to the front end board
+  const addVisualMarker = function (turn, cell) {
+    if (turn % 2 !== 0) {
+      cell.classList.add("x");
+    } else if (turn % 2 === 0) {
+      cell.classList.add("circle");
+    }
+  };
+
   return {
     start,
     addToArray,
+    addVisualMarker,
   };
 })();
 
