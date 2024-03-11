@@ -22,6 +22,7 @@ const Gameboard = (function () {
     gridContainer.classList.add("grid-container");
     let cellRowNumber;
     let cellColNumber;
+    let turn = 1;
 
     // const gridContainer = document.getElementById("grid-container");
 
@@ -40,7 +41,8 @@ const Gameboard = (function () {
             // Add class to visual cell
             //check for winners
             // Game.addToArray(Gameboard.gameboard, cellRowNumber, cellColNumber);
-            Game.addToArray(cellRowNumber, cellColNumber);
+            Game.addToArray(turn, cellRowNumber, cellColNumber);
+            turn++;
           },
           { once: true }
         );
@@ -87,9 +89,14 @@ const Game = (function () {
     Gameboard.render();
   };
 
-  const addToArray = function (firstIndex, secondIndex) {
-    Gameboard.gameboard[firstIndex][secondIndex] = "Hello YOU";
-    console.log(Gameboard.gameboard);
+  const addToArray = function (turn, firstIndex, secondIndex) {
+    if (turn % 2 !== 0) {
+      Gameboard.gameboard[firstIndex][secondIndex] = "X";
+      console.log(Gameboard.gameboard);
+    } else if (turn % 2 === 0) {
+      Gameboard.gameboard[firstIndex][secondIndex] = "O";
+      console.log(Gameboard.gameboard);
+    }
   };
 
   return {
