@@ -81,11 +81,6 @@ h1 {
   transform: rotate(-45deg);
 }
 
-/* Cell X hover */
-.cell.x:hover {
-  cursor: not-allowed;
-}
-
 /* Making the O marker */
 .cell.circle::before,
 .cell.circle::after {
@@ -107,13 +102,13 @@ h1 {
   background-color: white;
 }
 
-/* Cell O hover */
-.cell.circle:hover {
+/* Not allowed cursor on hovering over preoccupied cells */
+.cell.x,
+.cell.circle {
   cursor: not-allowed;
 }
 
-#controls,
-#restart-game {
+#controls {
   display: none;
 }
 
@@ -210,4 +205,26 @@ button {
   border-radius: 50%;
   background-color: white;
   border: 6px solid black;
+}
+
+.winning-message {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 5rem;
+}
+
+.winning-message button {
+  font-size: 3rem;
+  padding: 0.25em 0.5em;
+  cursor: pointer;
 }
