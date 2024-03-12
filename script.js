@@ -104,6 +104,17 @@ const Game = (function () {
       Gameboard.gameboard[firstIndex][secondIndex] = "O";
       console.log(Gameboard.gameboard);
     }
+
+    winner = checkWinner(Gameboard.gameboard);
+    if (winner) {
+      if (winner === "draw") {
+        console.log("It is a draw!");
+      } else {
+        console.log("The winner is: " + winner);
+      }
+    } else {
+      console.log("No winner yet");
+    }
   };
 
   // Function to add marker to the front end board
@@ -115,10 +126,48 @@ const Game = (function () {
     }
   };
 
+  // Function to check for winner after each marker insertion
+  const checkWinner = function (board) {
+    // Checking for winning combination in the rows
+    for (let row = 0; row <= 2; row++) {
+      for (let col = 0; col <= 2; col++) {
+        if (
+          board[row][0] === board[row][1] &&
+          board[row][1] === board[row][2]
+        ) {
+          return board[row][0];
+        }
+      }
+    }
+
+    // Checking for winning condition in the columns
+    for (let row = 0; row <= 2; row++) {
+      for (let col = 0; col <= 2; col++) {
+        if (
+          board[0][col] === board[1][col] &&
+          board[1][col] === board[2][col]
+        ) {
+          return board[0][col];
+        }
+      }
+    }
+
+    // Checking for winning condition in both the diagonals
+    if (
+      (board[0][0] === board[1][1] && board[1][1] === board[2][2]) ||
+      (board[0][2] === board[1][1] && board[1][1] === board[2][0])
+    ) {
+      if (board[1][1] !== null) {
+        return board[1][1];
+      }
+    }
+  };
+
   return {
     start,
     addToArray,
     addVisualMarker,
+    checkWinner,
   };
 })();
 
