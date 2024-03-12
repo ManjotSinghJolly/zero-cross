@@ -31,9 +31,6 @@ const Gameboard = (function () {
         const cell = document.createElement("div");
         cellRowNumber = rowNumber;
         cellColNumber = colNumber;
-        cell.addEventListener("onmouseup", function () {
-          cell.style.backgroundColor = "greenyellow";
-        });
         cell.addEventListener(
           "click",
           function () {
@@ -75,10 +72,11 @@ const createPlayer = function (name, marker) {
 
 //Game controller IIFE
 const Game = (function () {
+  let playerX;
+  let playerO;
   const start = function () {
     const turnIndicator = document.getElementById("turn-indicator");
-    let playerX;
-    let playerO;
+
     controlSection.style.display = "none";
     const playerXname = document.getElementById("player1").value;
     const playerOname = document.getElementById("player2").value;
@@ -105,13 +103,21 @@ const Game = (function () {
       console.log(Gameboard.gameboard);
     }
 
-    winner = checkWinner(Gameboard.gameboard);
+    let winner = checkWinner(Gameboard.gameboard);
+    const restartButton = document.getElementById("restart-game");
+    const winnerText = document.getElementById("winner-text");
     if (winner) {
       if (winner === "draw") {
         console.log("It is a draw!");
+        winnerText.innerHTML = "It is a draw!";
       } else {
-        console.log("The winner is: " + winner);
+        if (winner === "X") {
+          winnerText.innerHTML = `${playerX.name} won!`;
+        } else if (winner === "O") {
+          winnerText.innerHTML = `${playerO.name} won!`;
+        }
       }
+      restartButton.style.display = "block";
     } else {
       console.log("No winner yet");
     }
@@ -128,46 +134,60 @@ const Game = (function () {
 
   // Function to check for winner after each marker insertion
   const checkWinner = function (board) {
-    // Checking for winning combination in the rows
+    // Checking for a winning combination in the rows
     for (let row = 0; row <= 2; row++) {
-      for (let col = 0; col <= 2; col++) {
-        if (
-          board[row][0] === board[row][1] &&
-          board[row][1] === board[row][2]
-        ) {
-          return board[row][0];
-        }
+      if (board[row][0] === board[row][1] && board[row][1] === board[row][2]) {
+        // Returning the marker of the winning player
+        return board[row][0];
       }
     }
 
-    // Checking for winning condition in the columns
-    for (let row = 0; row <= 2; row++) {
-      for (let col = 0; col <= 2; col++) {
-        if (
-          board[0][col] === board[1][col] &&
-          board[1][col] === board[2][col]
-        ) {
-          return board[0][col];
-        }
+    // Checking for a winning combination in the columns
+    for (let col = 0; col <= 2; col++) {
+      if (board[0][col] === board[1][col] && board[1][col] === board[2][col]) {
+        // Returning the marker of the winning player
+        return board[0][col];
       }
     }
 
-    // Checking for winning condition in both the diagonals
+    // Checking for a winning combination in the diagonals
     if (
       (board[0][0] === board[1][1] && board[1][1] === board[2][2]) ||
       (board[0][2] === board[1][1] && board[1][1] === board[2][0])
     ) {
+      // Returning the center element which is common in both the diagonals and is the marker of the winning player
       if (board[1][1] !== null) {
         return board[1][1];
       }
     }
+
+    // Checking if there is a draw;
+    let isDraw = true;
+    for (let row = 0; row <= 2; row++) {
+      for (let col = 0; col <= 2; col++) {
+        if (board[row][col] === "") {
+          isDraw = false;
+          break;
+        }
+      }
+      if (!isDraw) {
+        break;
+      }
+    }
+
+    if (isDraw) {
+      return "draw";
+    }
+
+    return null;
   };
+
+  // Function to remove event listener from the cells
 
   return {
     start,
     addToArray,
     addVisualMarker,
-    checkWinner,
   };
 })();
 
