@@ -81,6 +81,11 @@ h1 {
   transform: rotate(-45deg);
 }
 
+/* Cell X hover */
+.cell.x:hover {
+  cursor: not-allowed;
+}
+
 /* Making the O marker */
 .cell.circle::before,
 .cell.circle::after {
@@ -100,6 +105,11 @@ h1 {
   width: calc(var(--mark-size) * 0.7);
   height: calc(var(--mark-size) * 0.7);
   background-color: white;
+}
+
+/* Cell O hover */
+.cell.circle:hover {
+  cursor: not-allowed;
 }
 
 #controls,
