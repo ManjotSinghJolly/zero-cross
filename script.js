@@ -31,22 +31,23 @@ const Gameboard = (function () {
         const cell = document.createElement("div");
         cellRowNumber = rowNumber;
         cellColNumber = colNumber;
-        cell.addEventListener(
-          "click",
-          function () {
-            cellRowNumber = cell.getAttribute("data-row");
-            cellColNumber = cell.getAttribute("data-column");
-            // Check for turn
-            // Add marker to array
-            // Add class to visual cell
-            //check for winners
-            // Game.addToArray(Gameboard.gameboard, cellRowNumber, cellColNumber);
+
+        cell.addEventListener("click", function () {
+          cellRowNumber = cell.getAttribute("data-row");
+          cellColNumber = cell.getAttribute("data-column");
+          let winningCondition = Game.checkWinner(Gameboard.gameboard);
+          if (winningCondition) {
+            return;
+          } else {
             Game.addToArray(turn, cellRowNumber, cellColNumber);
             Game.addVisualMarker(turn, cell);
             turn++;
-          },
-          { once: true }
-        );
+
+            {
+              once: true;
+            }
+          }
+        });
         cell.setAttribute("data-row", rowNumber);
         cell.setAttribute("data-column", colNumber);
         cell.classList.add("cell");
@@ -118,6 +119,7 @@ const Game = (function () {
         }
       }
       restartButton.style.display = "block";
+      Gameboard.winner = 1;
     } else {
       console.log("No winner yet");
     }
@@ -188,6 +190,7 @@ const Game = (function () {
     start,
     addToArray,
     addVisualMarker,
+    checkWinner,
   };
 })();
 
