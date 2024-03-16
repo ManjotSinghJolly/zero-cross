@@ -57,9 +57,20 @@ const Gameboard = (function () {
     body.appendChild(gridContainer);
   };
 
+  const emptyBoard = function () {
+    //Loop for emptying the gameboard array
+    for (i = 0; i <= 2; i++) {
+      for (j = 0; j <= 2; j++) {
+        gameboard[i][j] = "";
+      }
+    }
+    console.log(gameboard);
+  };
+
   return {
     gameboard,
     render,
+    emptyBoard,
   };
 })();
 
@@ -119,6 +130,9 @@ const Game = (function () {
         }
       }
       restartButton.style.display = "block";
+      restartButton.addEventListener("click", function () {
+        Gameboard.emptyBoard();
+      });
       Gameboard.winner = 1;
     } else {
       console.log("No winner yet");
