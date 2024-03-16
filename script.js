@@ -15,6 +15,8 @@ const Gameboard = (function () {
     ["", "", ""],
     ["", "", ""],
   ];
+  const cellArray = [];
+  let turn = 1;
 
   const render = function () {
     const body = document.body;
@@ -22,7 +24,6 @@ const Gameboard = (function () {
     gridContainer.classList.add("grid-container");
     let cellRowNumber;
     let cellColNumber;
-    let turn = 1;
 
     // const gridContainer = document.getElementById("grid-container");
 
@@ -51,6 +52,7 @@ const Gameboard = (function () {
         cell.setAttribute("data-row", rowNumber);
         cell.setAttribute("data-column", colNumber);
         cell.classList.add("cell");
+        cellArray.push(cell);
         gridContainer.appendChild(cell);
       }
     }
@@ -64,6 +66,18 @@ const Gameboard = (function () {
         gameboard[i][j] = "";
       }
     }
+
+    //removing the visual O marker classes from the cells
+    for (i = 0; i < cellArray.length; i++) {
+      cellArray[i].classList.remove("circle");
+      cellArray[i].classList.remove("x");
+    }
+
+    //resettng the turn variable to 1 so that the game starts with the x marker
+    turn = 1;
+
+    Game.winnerText.innerHTML = "";
+
     console.log(gameboard);
   };
 
@@ -86,6 +100,7 @@ const createPlayer = function (name, marker) {
 const Game = (function () {
   let playerX;
   let playerO;
+  const winnerText = document.getElementById("winner-text");
   const start = function () {
     const turnIndicator = document.getElementById("turn-indicator");
 
@@ -117,7 +132,7 @@ const Game = (function () {
 
     let winner = checkWinner(Gameboard.gameboard);
     const restartButton = document.getElementById("restart-game");
-    const winnerText = document.getElementById("winner-text");
+
     if (winner) {
       if (winner === "draw") {
         console.log("It is a draw!");
@@ -205,6 +220,7 @@ const Game = (function () {
     addToArray,
     addVisualMarker,
     checkWinner,
+    winnerText,
   };
 })();
 
