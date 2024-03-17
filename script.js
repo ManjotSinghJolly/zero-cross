@@ -33,22 +33,24 @@ const Gameboard = (function () {
         cellRowNumber = rowNumber;
         cellColNumber = colNumber;
 
-        cell.addEventListener("click", function () {
-          cellRowNumber = cell.getAttribute("data-row");
-          cellColNumber = cell.getAttribute("data-column");
-          let winningCondition = Game.checkWinner(Gameboard.gameboard);
-          if (winningCondition) {
-            return;
-          } else {
-            Game.addToArray(turn, cellRowNumber, cellColNumber);
-            Game.addVisualMarker(turn, cell);
-            turn++;
-
-            {
-              once: true;
+        cell.addEventListener(
+          "click",
+          function () {
+            cellRowNumber = cell.getAttribute("data-row");
+            cellColNumber = cell.getAttribute("data-column");
+            let winningCondition = Game.checkWinner(Gameboard.gameboard);
+            if (winningCondition) {
+              return;
+            } else {
+              Game.addToArray(turn, cellRowNumber, cellColNumber);
+              Game.addVisualMarker(turn, cell);
+              turn++;
             }
+          },
+          {
+            once: true,
           }
-        });
+        );
         cell.setAttribute("data-row", rowNumber);
         cell.setAttribute("data-column", colNumber);
         cell.classList.add("cell");
